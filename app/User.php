@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Anuncio', 'usuario_id', 'id');
     }
+
+    public function isAdmin()
+    {
+        return $this->tipoUsuario->id == 4;
+    }
 }

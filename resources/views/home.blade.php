@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends(auth()->check()? (auth()->user()->isAdmin()? 'layouts.admin' : 'layouts.moderator') : 'layouts.app')
 
 @section('title')
     Home
@@ -6,7 +6,7 @@
 
 @section('content')
     @guest
-
+        Inicie la sesion
     @else
     <div class="container">
         <div class="row">

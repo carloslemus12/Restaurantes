@@ -33,7 +33,7 @@ class Platillo extends Model
     }
 
     public function restaurantes(){
-        return  $this->belongsToMany('App\Restaurante', 'detalle_restaurante_platillo', 'platillo_id', 'id');
+        return  $this->belongsToMany('App\Restaurante', 'detalle_restaurante_platillo', 'platillo_id', 'restaurante_id');
     }
 
     public function fotos()

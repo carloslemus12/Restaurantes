@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Platillo;
 
 class Restaurante extends Model
 {
@@ -32,7 +33,7 @@ class Restaurante extends Model
     }
 
     public function platillos(){
-        return  $this->belongsToMany('App\Platillo', 'detalle_restaurante_platillo', 'restaurante_id', 'id');
+        return  $this->belongsToMany('App\Platillo', 'detalle_restaurante_platillo', 'restaurante_id', 'platillo_id');
     }
 
     public function anuncios()
@@ -43,5 +44,34 @@ class Restaurante extends Model
     public function fotos()
     {
         return $this->hasMany('App\FotoRestaurante', 'restaurante_id', 'id');
+    }
+
+    public function sinPlatillos()
+    {
+        $platillos = [];
+
+        $platillos_all = Platillo::all();
+        $platillos_cont = $this->platillos;
+
+        foreach ($platillos_all as $platillo) {
+            $existe = false;
+            foreach ($platillos_cont as $value) {
+                if ($platillo->id == $value->id) {
+                    $existe= true;
+                    break;
+                }
+            }
+
+            if (!$existe) {
+                array_push($platillos, $platillo);
+            }
+        }
+
+        return $platillos;
+    }
+
+    public function constaintSinPlatillos()
+    {
+        return count($this->sinPlatillos()) > 0;
     }
 }

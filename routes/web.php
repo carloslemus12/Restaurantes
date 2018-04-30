@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::prefix('adm')->group(function(){
+    Route::post('/saucers/add/{id}', 'RestaurantSaucersController@add')->name('saucers.add');
+    Route::post('/saucers/remove/{id}', 'RestaurantSaucersController@remove')->name('saucers.remove');
+    Route::post('/restaurant/picture/add/{id}', 'RestaurantController@pictureAdd')->name('picture.add');
+    Route::post('/restaurant/picture/remove/{id}', 'RestaurantController@pictureRemove')->name('picture.remove');
+    Route::resource('restaurant', 'RestaurantController');
+    
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
