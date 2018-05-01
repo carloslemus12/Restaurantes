@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('img/coffee.svg')  }}" width="30" height="30" class="d-inline-block align-top" alt="">
             Tipicos Marghot

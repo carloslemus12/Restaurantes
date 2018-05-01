@@ -46,13 +46,13 @@
 
                                 <td class="text-center d-flex justify-content-around">
                                     <a href="{{ url('adm/restaurant/'.$restaurante->id) }}"><img src="{{ asset('svg/si-glyph-picture.svg')  }}" style="width:32px;"/></a>
+                                    
+                                    <a href="{{ url('adm/restaurant/'.$restaurante->id.'/edit') }}"><img src="{{ asset('svg/si-glyph-edit.svg')  }}" style="width:32px;"/></a>
 
                                     <button type="button" class="btn_direccion p-0 m-0 btn-unstyled" restaurante_id="{{ $restaurante->id }}" data-toggle="modal" data-target="#exampleModalLong">
                                         <img src="{{ asset('svg/si-glyph-subway.svg')  }}" style="width:32px;"/>
                                     </button>
-                                    
-                                    <a href="{{ url('adm/restaurant/'.$restaurante->id.'/edit') }}"><img src="{{ asset('svg/si-glyph-edit.svg')  }}" style="width:32px;"/></a>
-                                    
+
                                     <form method="POST" action="{{ url('adm/restaurant/'.$restaurante->id) }}">
                                         {!! csrf_field() !!}
 

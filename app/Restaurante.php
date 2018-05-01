@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Platillo;
 
@@ -12,6 +12,10 @@ class Restaurante extends Model
     protected $fillable = [
         'id', 'departamendo', 'municipio', 'ciudad', 'calle', 'estado', 'created_at', 'updated_at'
     ];
+
+    public function codigo(){
+        return substr(strtoupper(trim($this->departamendo)), 0, 3).str_repeat("0", 3 - strlen("$this->id") ).$this->id;
+    }
 
     public function usuarios(){
         return  $this->belongsToMany('App\User', 'detalle_usuario_restaurante', 'restaurante_id', 'id');
@@ -73,5 +77,15 @@ class Restaurante extends Model
     public function constaintSinPlatillos()
     {
         return count($this->sinPlatillos()) > 0;
+    }
+
+    public function constaintFotos()
+    {
+        return count($this->fotos()) > 0;
+    }
+
+    public function votos(){
+        $votos = DB::table('restaurantes')->selectRaw('restaurantes.id as id, CAST((CASE WHEN AVG(detalle_restaurante_votacion.voto) is null THEN 0 else AVG(detalle_restaurante_votacion.voto) END) as int) as votaciones')->leftJoin('detalle_restaurante_votacion', 'restaurantes.id', '=', 'detalle_restaurante_votacion.restaurante_id')->where('restaurantes.id', $this->id)->groupBy('restaurantes.id')->limit(1)->first();
+        return $votos->votaciones;
     }
 }

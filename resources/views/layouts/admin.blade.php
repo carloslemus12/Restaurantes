@@ -5,6 +5,9 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/adm/restaurant') }}">Restaurante</a>
     </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{{ route('adm.statistic') }}">Estadisticas</a>
+        </li>
     @endauth
 @endsection
 

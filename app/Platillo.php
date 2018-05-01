@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Platillo extends Model
@@ -39,5 +40,15 @@ class Platillo extends Model
     public function fotos()
     {
         return $this->hasMany('App\FotoPlatillo', 'platillo_id', 'id');
+    }
+
+    public function constaintFotos()
+    {
+        return count($this->fotos) > 0;
+    }
+
+    public function votos(){
+        $votos = DB::table('platillos')->selectRaw('platillos.id as id,  CAST((CASE WHEN AVG(detalle_platillo_votacion.voto) is null THEN 0 else AVG(detalle_platillo_votacion.voto) END) as int) as votaciones')->leftJoin('detalle_platillo_votacion', 'platillos.id', '=', 'detalle_platillo_votacion.platillo_id')->where('platillos.id', $this->id)->groupBy('platillos.id')->limit(1)->first();
+        return $votos->votaciones;
     }
 }
