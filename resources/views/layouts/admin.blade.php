@@ -8,6 +8,9 @@
     <li class="nav-item">
             <a class="nav-link" href="{{ route('adm.statistic') }}">Estadisticas</a>
         </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/adm/saucer')}}">Platillos</a>
+    </li>
     @endauth
 @endsection
 

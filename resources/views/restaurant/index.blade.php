@@ -58,7 +58,7 @@
 
                                         <input type="hidden" name="_method" value="DELETE">
 
-                                        <button type="submit" class="p-0 m-0 btn-unstyled"><img src="{{ asset('svg/si-glyph-trash.svg')  }}" style="width:32px;"/></button>
+                                        <button type="submit" onclick="return confirm('¿Realmente desea eliminar este local?');" class="p-0 m-0 btn-unstyled"><img src="{{ asset('svg/si-glyph-trash.svg')  }}" style="width:32px;"/></button>
                                     </form>
                                 </td>
                             </tr>

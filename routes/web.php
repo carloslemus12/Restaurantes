@@ -26,6 +26,11 @@ Route::prefix('adm')->group(function(){
     Route::post('/restaurant/picture/add/{id}', 'RestaurantController@pictureAdd')->name('picture.add');
     Route::post('/restaurant/picture/remove/{id}', 'RestaurantController@pictureRemove')->name('picture.remove');
     Route::resource('restaurant', 'RestaurantController');
+
+    Route::resource('saucer','SaucersController');
+    Route::post('/saucer/destroy/{id}','SaucersController@destroy')->name('saucer.destroy');
+    Route::post('/saucer/picture2/add/{id}', 'SaucersController@pictureAdd')->name('picture2.add');
+    Route::post('/saucer/picture2/remove/{id}', 'SaucersController@pictureRemove')->name('picture2.remove');
     
 });
 

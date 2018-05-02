@@ -15,12 +15,15 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $restaurantes = Restaurante::all();
 
+
         return view('restaurant.index')->with(compact('restaurantes'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -29,6 +32,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+
         return view('restaurant.create');
     }
 
@@ -60,6 +64,7 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $restaurante = Restaurante::find($id);
