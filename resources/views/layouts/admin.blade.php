@@ -11,6 +11,9 @@
     <li class="nav-item">
         <a class="nav-link" href="{{url('/adm/saucer')}}">Platillos</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/adm/advertisement')}}">Anuncios</a>
+    </li>
     @endauth
 @endsection
 

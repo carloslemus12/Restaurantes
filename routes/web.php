@@ -31,7 +31,9 @@ Route::prefix('adm')->group(function(){
     Route::post('/saucer/destroy/{id}','SaucersController@destroy')->name('saucer.destroy');
     Route::post('/saucer/picture2/add/{id}', 'SaucersController@pictureAdd')->name('picture2.add');
     Route::post('/saucer/picture2/remove/{id}', 'SaucersController@pictureRemove')->name('picture2.remove');
-    
+
+    Route::resource('advertisement','AdvertisementController');
+    Route::post('/advertisement/destroy/{id}','AdvertisementController@destroy')->name('advertisement.destroy');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
