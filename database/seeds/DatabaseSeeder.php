@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             PlatillosTableSeeder::class,
             DetalleUsuarioActividadTableSeeder::class,
             RestauranteTableSeeder::class,
-            DetalleUsuarioRestauranteTableSeeder::class
+            DetalleUsuarioRestauranteTableSeeder::class,
+            TipoPremioTableSeeder::class
         ]);
     }
 }

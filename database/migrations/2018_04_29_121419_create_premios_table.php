@@ -20,7 +20,10 @@ class CreatePremiosTable extends Migration
             $table->integer('mes');
             $table->integer('anio');
             $table->string('descripcion', 250);
+            $table->unsignedInteger('tipo_premio_id');
             $table->timestamps();
+
+            $table->foreign('tipo_premio_id')->references('id')->on('tipos_premios');
         });
     }
 
