@@ -36,4 +36,21 @@ Route::prefix('adm')->group(function(){
     Route::post('/advertisement/destroy/{id}','AdvertisementController@destroy')->name('advertisement.destroy');
 });
 
+Route::prefix('cli')->group(function(){
+    Route::get('/restaurants', 'RestaurantController@client')->name('cli.restaurants');
+    Route::get('/restaurant/{id}', 'ClientController@restaurant')->name('cli.restaurant');
+    Route::get('/restaurant/light/comments/{id}', 'ClientController@getComentarios')->name('cli.commentslight');
+    Route::get('/restaurant/comments/{id}', 'ClientController@comentarios')->name('cli.comments');
+
+    Route::get('/restaurant/recommendations/{id}', 'ClientController@recomendaciones')->name('cli.recommendations');
+    Route::get('/restaurant/light/recommendations/{id}', 'ClientController@getRecomendaciones')->name('cli.recommendationslight');
+
+    Route::post('/restaurant/recommendations/add/{id}', 'ClientController@addRecomendacion')->name('cli.restaurantRecommendations');
+    Route::post('/restaurant/recommendations/delete/{id}', 'ClientController@removeRecomendacion')->name('cli.deleteRecommendations');
+
+    Route::post('/restaurant/comment/add/{id}', 'ClientController@addComentario')->name('cli.restaurantComment');
+    Route::post('/restaurant/comment/delete/{id}', 'ClientController@removeComentario')->name('cli.deleteComment');
+    Route::post('/restaurant/star/{id}', 'ClientController@start')->name('cli.start');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');

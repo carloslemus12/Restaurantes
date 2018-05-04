@@ -86,6 +86,8 @@
         </div>
     </nav>
 
+    @yield('icon')
+
     <div id="app">
         @yield('content')
     </div>

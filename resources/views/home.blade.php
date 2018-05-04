@@ -1,4 +1,4 @@
-@extends(auth()->check()? (auth()->user()->isAdmin()? 'layouts.admin' : 'layouts.moderator') : 'layouts.app')
+@extends(auth()->check()? (auth()->user()->isAdmin()? 'layouts.admin' : (auth()->user()->isModerator()? 'layouts.moderator' : (auth()->user()->isEmpleado()? 'layouts.empleado' : 'layouts.client'))) : 'layouts.app')
 
 @section('title')
     Home
@@ -6,25 +6,19 @@
 
 @section('content')
     @guest
-        Inicie la sesion
+        <div class="container w-100 d-flex justify-content-center align-items-center mt-5">
+            <img src="{{ asset('img/bad.svg') }}" />
+        </div>
+        <div class="container w-100 d-flex justify-content-center">
+            <h3 class="text-danger">Debe de iniciar la sesion</h3>
+        </div>
     @else
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
-    
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-    
-                        You are logged in!
-                    </div>
-                </div>
-            </div>
+        <div class="container w-100 d-flex justify-content-center align-items-center mt-5">
+            <img src="{{ asset('img/internet.svg') }}" />
+        </div>
+        <div class="container w-100 d-flex justify-content-center">
+            <h3 class="text-success" >Bienvenido <strong>{{ auth()->user()->username }}</strong></h3>
         </div>
     </div>
     @endguest

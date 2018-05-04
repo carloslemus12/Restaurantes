@@ -148,4 +148,11 @@ class RestaurantController extends Controller
 
         return redirect('/adm/restaurant/'.$id);
     }
+
+    public function client()
+    {
+        $restaurantes = Restaurante::all();
+
+        return view('clients.restaurants')->with(compact('restaurantes'));
+    }
 }

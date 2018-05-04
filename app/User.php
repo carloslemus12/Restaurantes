@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\RestauranteVotacion;
 
 class User extends Authenticatable
 {
@@ -64,12 +65,12 @@ class User extends Authenticatable
 
     public function votacionesRestaurantes()
     {
-        return $this->hasMany('App\RestauranteRecomendacion', 'usuario_id', 'id');
+        return $this->hasMany('App\RestauranteVotacion', 'usuario_id', 'id');
     }
 
     public function recomendacionesRestaurantes()
     {
-        return $this->hasMany('App\RestauranteVotacion', 'usuario_id', 'id');
+        return $this->hasMany('App\RestauranteRecomendacion', 'usuario_id', 'id');
     }
 
     public function premios(){
@@ -84,5 +85,29 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->tipoUsuario->id == 4;
+    }
+
+    public function isClient()
+    {
+        return $this->tipoUsuario->id == 1;
+    }
+
+    public function isModerator()
+    {
+        return $this->tipoUsuario->id == 3;
+    }
+
+    public function isEmpleado()
+    {
+        return $this->tipoUsuario->id == 2;
+    }
+
+    public function votacionRestauranteId($id){
+        $votacion = RestauranteVotacion::where('usuario_id', $this->id)->where('restaurante_id', $id)->first();
+
+        if (isset($votacion))
+            return $votacion->voto;
+        else
+            return 0;
     }
 }

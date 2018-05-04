@@ -14,11 +14,11 @@ class RestauranteVotacion extends Model
 
     public function usuario()
     {
-        return $this->belongsTo('App\User', 'usuario_id', 'id');
+        return $this->belongsTo('App\User', 'usuario_id');
     }
 
     public function restaurante()
     {
-        return $this->belongsTo('App\Restaurante', 'restaurante_id', 'id');
+        return $this->belongsTo('App\Restaurante', 'restaurante_id');
     }
 }

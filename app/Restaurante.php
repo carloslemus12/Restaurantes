@@ -81,7 +81,7 @@ class Restaurante extends Model
 
     public function constaintFotos()
     {
-        return count($this->fotos()) > 0;
+        return count($this->fotos) > 0;
     }
 
     public function votos(){
