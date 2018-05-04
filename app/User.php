@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\RestauranteVotacion;
+use App\PlatilloVotacion;
 
 class User extends Authenticatable
 {
@@ -104,6 +105,15 @@ class User extends Authenticatable
 
     public function votacionRestauranteId($id){
         $votacion = RestauranteVotacion::where('usuario_id', $this->id)->where('restaurante_id', $id)->first();
+
+        if (isset($votacion))
+            return $votacion->voto;
+        else
+            return 0;
+    }
+
+    public function votacionPlatilloId($id){
+        $votacion = PlatilloVotacion::where('usuario_id', $this->id)->where('platillo_id', $id)->first();
 
         if (isset($votacion))
             return $votacion->voto;

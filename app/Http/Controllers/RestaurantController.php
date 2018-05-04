@@ -155,4 +155,9 @@ class RestaurantController extends Controller
 
         return view('clients.restaurants')->with(compact('restaurantes'));
     }
+
+    public function getStars($id){
+        $restaurante = Restaurante::find($id);
+        return view('clients.starRestaurant')->with(compact('restaurante'));
+    }
 }

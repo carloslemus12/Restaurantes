@@ -10,6 +10,9 @@ use App\Restaurante;
 use App\TipoPlatillo;
 use App\FotoPlatillo;
 use Carbon\Carbon;
+use App\PlatilloComentario;
+use App\PlatilloRecomendacion;
+use App\PlatilloVotacion;
 
 
 class SaucersController extends Controller
@@ -179,4 +182,70 @@ class SaucersController extends Controller
         return redirect('/adm/saucer/'.$id);
     }
 
+    public function client(){
+        $platillos = Platillo::all();
+
+        return view('clients.saucers')->with(compact('platillos'));
+    }
+
+    public function addComentario(Request $request, $id)
+    {
+        $comentario = new PlatilloComentario;
+
+        $comentario->platillo_id = $id;
+        $comentario->usuario_id = $request['usuario'];
+        $comentario->comentario = $request['comentario'];
+        $comentario->created_at = Carbon::now();
+        
+        $comentario->save();
+    }
+
+    public function removeComentario(Request $request, $id)
+    {
+        $recomendacion = PlatilloComentario::find($id);
+        $recomendacion->delete();
+    }
+
+    public function addRecomendacion(Request $request, $id)
+    {
+        $recomendacion = new PlatilloRecomendacion;
+
+        $recomendacion->platillo_id = $id;
+        $recomendacion->usuario_id = $request['usuario'];
+        $recomendacion->recomendacion = $request['recomendacion'];
+        $recomendacion->created_at = Carbon::now();
+        
+        $recomendacion->save();
+    }
+
+    public function removeRecomendacion(Request $request, $id)
+    {
+        $recomendacion = PlatilloRecomendacion::find($id);
+        $recomendacion->delete();
+    }
+
+    public function start(Request $request, $id){
+        $star = $request['star'];
+        $usuario = $request['usuario'];
+
+        if (PlatilloVotacion::where('platillo_id', $id)->where('usuario_id', $usuario)->exists()) {
+            $votacion = PlatilloVotacion::where('platillo_id', $id)->where('usuario_id', $usuario)->first();
+            $votacion->voto = $star;
+            $votacion->updated_at = Carbon::now();
+            $votacion->save();
+
+        } else {
+            $votacion = new PlatilloVotacion;
+            $votacion->platillo_id = $id;
+            $votacion->usuario_id = $usuario;
+            $votacion->voto = $star;
+            $votacion->created_at = Carbon::now();
+            $votacion->save();
+        }
+    }
+
+    public function getStars($id){
+        $platillo = Platillo::find($id);
+        return view('clients.starSaucer')->with(compact('platillo'));
+    }
 }

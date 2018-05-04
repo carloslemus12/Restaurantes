@@ -6,10 +6,13 @@
         <a class="nav-link" href="{{ route('cli.restaurants') }}">Sucursales</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Platillos</a>
+        <a class="nav-link" href="{{ route('cli.saucers') }}">Platillos</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Anuncios</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Premios</a>
     </li>
     @endauth
 @endsection

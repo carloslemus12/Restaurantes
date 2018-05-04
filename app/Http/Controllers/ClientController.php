@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Platillo;
 use App\RestauranteVotacion;
 use App\RestauranteComentario;
 use App\RestauranteRecomendacion;
@@ -13,8 +14,12 @@ class ClientController extends Controller
 {
     public function restaurant($id){
         $restaurante = Restaurante::find($id);
-
         return view('clients.restaurant')->with(compact('restaurante'));
+    }
+
+    public function saucer($id){
+        $platillo = Platillo::find($id);
+        return view('clients.saucer')->with(compact('platillo'));
     }
 
     public function recomendaciones($id){
@@ -91,5 +96,25 @@ class ClientController extends Controller
             $votacion->created_at = Carbon::now();
             $votacion->save();
         }
+    }
+
+    public function getSaucerComentarios($id){
+        $platillo = Platillo::find($id);
+        return view('clients.saurceCommentslight')->with(compact('platillo'));
+    }
+
+    public function saucerComentarios($id){
+        $platillo = Platillo::find($id);
+        return view('clients.saurceComments')->with(compact('platillo'));
+    }
+
+    public function getSaucerRecomendaciones($id){
+        $platillo = Platillo::find($id);
+        return view('clients.saucerRecommendationslight')->with(compact('platillo'));
+    }
+
+    public function saucerRecomendaciones($id){
+        $platillo = Platillo::find($id);
+        return view('clients.saucerRecommendations')->with(compact('platillo'));
     }
 }

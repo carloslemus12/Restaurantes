@@ -37,6 +37,10 @@ Route::prefix('adm')->group(function(){
 });
 
 Route::prefix('cli')->group(function(){
+    Route::get('/saucer/stars/{id}', 'RestaurantController@getStars')->name('cli.getSaucerStars');
+    Route::get('/restaurants/stars/{id}', 'SaucersController@getStars')->name('cli.getRestaurantStars');
+
+    // Restaurantes ////////////////////////////////////////////////////////////////////////////////////////////
     Route::get('/restaurants', 'RestaurantController@client')->name('cli.restaurants');
     Route::get('/restaurant/{id}', 'ClientController@restaurant')->name('cli.restaurant');
     Route::get('/restaurant/light/comments/{id}', 'ClientController@getComentarios')->name('cli.commentslight');
@@ -51,6 +55,23 @@ Route::prefix('cli')->group(function(){
     Route::post('/restaurant/comment/add/{id}', 'ClientController@addComentario')->name('cli.restaurantComment');
     Route::post('/restaurant/comment/delete/{id}', 'ClientController@removeComentario')->name('cli.deleteComment');
     Route::post('/restaurant/star/{id}', 'ClientController@start')->name('cli.start');
+
+    // Platillos //////////////////////////////////////////////////////////////////////////////////////////////////
+    Route::get('/saucers', 'SaucersController@client')->name('cli.saucers');
+    Route::get('/saucer/{id}', 'ClientController@saucer')->name('cli.saucer');
+    Route::get('/saucer/light/comments/{id}', 'ClientController@getSaucerComentarios')->name('cli.saucercommentslight');
+    Route::get('/saucer/comments/{id}', 'ClientController@saucerComentarios')->name('cli.saucerComments');
+
+    Route::get('/saucer/recommendations/{id}', 'ClientController@saucerRecomendaciones')->name('cli.saucerRecommendations');
+    Route::get('/saucer/light/recommendations/{id}', 'ClientController@getSaucerRecomendaciones')->name('cli.saucerRecommendationslight');
+
+    Route::post('/saucer/comment/add/{id}', 'SaucersController@addComentario')->name('cli.saucersComment');
+    Route::post('/saucer/comment/delete/{id}', 'SaucersController@removeComentario')->name('cli.saucersDeleteComment');
+
+    Route::post('/saucer/recommendations/add/{id}', 'SaucersController@addRecomendacion')->name('cli.saucerAddRecommendations');
+    Route::post('/saucer/recommendations/delete/{id}', 'SaucersController@removeRecomendacion')->name('cli.saucerDeleteRecommendations');
+
+    Route::post('/saucer/star/{id}', 'SaucersController@start')->name('cli.saucerStart');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
