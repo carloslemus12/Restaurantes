@@ -53,4 +53,20 @@ Route::prefix('cli')->group(function(){
     Route::post('/restaurant/star/{id}', 'ClientController@start')->name('cli.start');
 });
 
+Route::prefix('mod')->group(function(){
+
+    Route::get('/modsaucer/create','ModsaucersController@create')->name('mod.modsaucers.create');
+    Route::post('/modsaucer/destroy/{id}','ModsaucersController@destroy')->name('modsaucer.destroy');    
+    Route::get('/modsaucers/{id}','ModsaucersController@index')->name('mod.modsaucers');
+    Route::get('/modsaucer/{id}','ModsaucersController@show');
+    Route::post('/modsaucer/picture/add/{id}','ModsaucersController@pictureAdd')->name('picture.add');
+    Route::post('/modsaucer/picture/remove/{id}','ModsaucersController@pictureRemove')->name('picture.remove');
+   
+    Route::resource('modsaucers','ModsaucersController');
+
+    Route::post('/modemployes/add/{id}','ModemployesController@add');
+    Route::get('/modemployes/{id}','ModemployesController@index');
+
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
