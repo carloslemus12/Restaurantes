@@ -65,6 +65,9 @@ Route::prefix('cli')->group(function(){
     Route::get('/saucer/recommendations/{id}', 'ClientController@saucerRecomendaciones')->name('cli.saucerRecommendations');
     Route::get('/saucer/light/recommendations/{id}', 'ClientController@getSaucerRecomendaciones')->name('cli.saucerRecommendationslight');
 
+    Route::get('/advertisements', 'ClientController@advertisements')->name('cli.advertisements');
+    Route::get('/awards', 'ClientController@awards')->name('cli.awards');
+
     Route::post('/saucer/comment/add/{id}', 'SaucersController@addComentario')->name('cli.saucersComment');
     Route::post('/saucer/comment/delete/{id}', 'SaucersController@removeComentario')->name('cli.saucersDeleteComment');
 

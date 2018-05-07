@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Anuncio;
 use App\Platillo;
 use App\RestauranteVotacion;
 use App\RestauranteComentario;
@@ -9,6 +12,7 @@ use App\RestauranteRecomendacion;
 use Illuminate\Http\Request;
 use App\Restaurante;
 use Carbon\Carbon;
+use App\Premio;
 
 class ClientController extends Controller
 {
@@ -116,5 +120,15 @@ class ClientController extends Controller
     public function saucerRecomendaciones($id){
         $platillo = Platillo::find($id);
         return view('clients.saucerRecommendations')->with(compact('platillo'));
+    }
+
+    public function advertisements(){
+        $anuncios = Anuncio::whereRaw('fecha_final >= NOW()')->get();
+        return view('clients.advertisements')->with(compact('anuncios'));
+    }
+
+    public function awards(){
+        $premios = Premio::join('detalle_usuario_premio', 'detalle_usuario_premio.premio_id', '=', 'premios.id')->join('tipos_premios', 'tipos_premios.id', '=', 'premios.tipo_premio_id')->where('detalle_usuario_premio.usuario_id', Auth::user()->id)->select('premios.premio', 'premios.descripcion', DB::raw('DATE_ADD(DATE_ADD(DATE_ADD(detalle_usuario_premio.created_at, interval premios.dia day), interval premios.mes MONTH), interval premios.anio YEAR) as created_at'), 'tipos_premios.tipo as tipo')->get();
+        return view('clients.awards')->with(compact('premios'));
     }
 }

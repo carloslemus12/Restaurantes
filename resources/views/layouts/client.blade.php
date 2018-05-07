@@ -9,10 +9,10 @@
         <a class="nav-link" href="{{ route('cli.saucers') }}">Platillos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Anuncios</a>
+        <a class="nav-link" href="{{ route('cli.advertisements') }}">Anuncios</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Premios</a>
+        <a class="nav-link" href="{{ route('cli.awards') }}">Premios</a>
     </li>
     @endauth
 @endsection
