@@ -49,6 +49,12 @@ class ModemployesController extends Controller
                 'created_at' => Carbon::now()
             ]
         );
+
+        $usuario=User::find($id);
+        $usuario->tipo_usuario_id=2;
+        $usuario->updated_at = Carbon::now();
+
+        $usuario->save();
         
 
         return redirect('mod/modemployes/'.$request['sucursal']);

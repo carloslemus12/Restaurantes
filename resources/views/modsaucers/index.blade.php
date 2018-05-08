@@ -39,13 +39,15 @@
                                     var detalle = {};
 
                                     detalle['descripcion'] = '{{$platillo->descripcion}}';
-                                    detalle['especialidad'] = '{{($platillo->especialidad==1)? "Si" : "No"}}';                                                                        
+                                    detalle['especialidad'] = '{{($platillo->especialidad==1)? "Si" : "No"}}';                                      
                                   platillo[{{ $platillo->id }}] = detalle;
                                 </script>
 
                                 <td class="text-center d-flex justify-content-around">
                                     <a href="{{ url('mod/modsaucer/'.$platillo->id) }}"><img src="{{ asset('svg/si-glyph-picture.svg')  }}" style="width:32px;"/></a>
-                                    
+
+                                    <a href="{{url('mod/modsaucers/comments/'.$platillo->id)}}"><img src="{{ asset('svg/si-glyph-bubble-message.svg')  }}" style="width:32px;"/></a>          
+
                                     <a href="{{ url('mod/modsaucers/'.$platillo->id.'/edit') }}"><img src="{{ asset('svg/si-glyph-edit.svg')  }}" style="width:32px;"/></a>
 
                                     <button type="button" class="btn_detalle p-0 m-0 btn-unstyled" platillo_id="{{ $platillo->id }}" data-toggle="modal" data-target="#exampleModalLong">
@@ -91,9 +93,10 @@
                     <div class="col-12 col-md-6">
                         <label for="municipio">Especialidad del restaurante</label>
                         <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="especialidad" disabled>
-                    </div>
-                </div>
+                    </div>     
+                    
             </div>
+               </div>
         </div>
     </div>
 </div>

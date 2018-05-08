@@ -12,7 +12,7 @@
         <a class="nav-link" href="{{url('/mod/prize')}}">Premios</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/mod/recommendation')}}">Recomendaciones</a>
+        <a class="nav-link" href="{{url('/mod/recommendation/'.Auth::user()->id) }}">Recomendaciones</a>
     </li>
     @endauth
 @endsection

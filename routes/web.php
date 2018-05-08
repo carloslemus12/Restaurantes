@@ -28,6 +28,7 @@ Route::prefix('adm')->group(function(){
     Route::resource('restaurant', 'RestaurantController');
 
     Route::resource('saucer','SaucersController');
+
     Route::post('/saucer/destroy/{id}','SaucersController@destroy')->name('saucer.destroy');
     Route::post('/saucer/picture2/add/{id}', 'SaucersController@pictureAdd')->name('picture2.add');
     Route::post('/saucer/picture2/remove/{id}', 'SaucersController@pictureRemove')->name('picture2.remove');
@@ -85,11 +86,17 @@ Route::prefix('mod')->group(function(){
     Route::get('/modsaucer/{id}','ModsaucersController@show');
     Route::post('/modsaucer/picture/add/{id}','ModsaucersController@pictureAdd')->name('picture.add');
     Route::post('/modsaucer/picture/remove/{id}','ModsaucersController@pictureRemove')->name('picture.remove');
+    Route::get('/modsaucers/comments/{id}','ModsaucersController@comments');
+
+    Route::post('/comments/delete/{id}','ModsaucersController@delete')->name('comments.delete');
    
     Route::resource('modsaucers','ModsaucersController');
 
     Route::post('/modemployes/add/{id}','ModemployesController@add');
     Route::get('/modemployes/{id}','ModemployesController@index');
+
+    Route::get('/recommendation/{id}','RecommendationController@list');
+    Route::post('/recommendation/destroy/{id}','RecommendationController@destroy')->name("recommendation.destroy");
 
 });
 

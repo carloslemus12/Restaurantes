@@ -64,7 +64,7 @@
                                 <td>{{ 'USR'.str_repeat("0", 3 - strlen("$empleado->id") ).$empleado->id }}</td>
                                 <td>{{$empleado->username}}</td>
                                 <td>{{$empleado->nombre}}</td>
-                                <td>${{$empleado->apellido}}</td>
+                                <td>{{$empleado->apellido}}</td>
                                 <td>{{($empleado->estado == 1)? 'Habilitado' : 'Desabilitado'}}</td>                        
                             </tr>
                         @endforeach                        

@@ -27,8 +27,7 @@ class ModsaucersController extends Controller
 		->join('tipos_platillo','tipos_platillo.id','=','platillos.tipo_id')
 		->select('platillos.id','platillos.platillo','tipos_platillo.tipo_platillo','platillos.estado','platillos.precio','platillos.descripcion','platillos.especialidad')
 		->where('detalle_restaurante_platillo.restaurante_id','=',$restaurant[0]->restaurante_id)
-		->get();
-
+		->get();      
 
 		return view('modsaucers.index')->with(compact('platillos'));
 
@@ -143,6 +142,27 @@ class ModsaucersController extends Controller
         $foto->delete();
 
         return redirect('/mod/modsaucer/'.$id);
+    }
+
+    public function comments($id){
+
+        $platillo=Platillo::find($id);
+
+        $comentarios = DB::table('detalle_platillo_comentario')
+        ->join('users','users.id','=','detalle_platillo_comentario.usuario_id')
+        ->select('users.username','detalle_platillo_comentario.comentario','detalle_platillo_comentario.created_at','detalle_platillo_comentario.id')
+        ->where('detalle_platillo_comentario.platillo_id','=',$platillo->id)
+        ->get();
+
+        return view('modsaucers.comments')->with(compact('comentarios','platillo'));
+        
+    }
+
+    public function delete(Request $request,$id){
+
+        DB::table('detalle_platillo_comentario')->where('id', $id)->delete();
+
+        return redirect('mod/modsaucers/comments/'.$request["platillo"]);
     }
 
 }
