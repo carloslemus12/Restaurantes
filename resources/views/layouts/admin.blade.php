@@ -14,6 +14,14 @@
     <li class="nav-item">
         <a class="nav-link" href="{{url('/adm/advertisement')}}">Anuncios</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/adm/permits')}}">Otorgar Permisos</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/adm/gifts')}}">Crear Premios</a>
+    </li>
     @endauth
 @endsection
 

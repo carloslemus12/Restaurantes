@@ -35,6 +35,13 @@ Route::prefix('adm')->group(function(){
 
     Route::resource('advertisement','AdvertisementController');
     Route::post('/advertisement/destroy/{id}','AdvertisementController@destroy')->name('advertisement.destroy');
+
+    Route::resource('permits','PermitsController');
+    Route::post('permits/add/{id}','PermitsController@add');
+
+    Route::resource('gifts','GiftsController');
+     Route::post('/gifts/destroy/{id}','GiftsController@destroy')->name('gifts.destroy');
+
 });
 
 Route::prefix('cli')->group(function(){
